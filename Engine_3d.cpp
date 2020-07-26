@@ -188,7 +188,9 @@ public:
 			normal.y /= lenNorm;
 			normal.z /= lenNorm;
 
-			if (normal.z < 0)
+			if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
+					normal.y * (triTranslated.p[0].y - vCamera.y) +
+					normal.z * (triTranslated.p[0].z - vCamera.z)) < 0.0f)
 			{
 
 
