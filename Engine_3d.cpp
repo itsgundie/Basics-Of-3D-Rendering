@@ -3,6 +3,11 @@
 
 
 #include "engine.h"
+#include <fstream>
+#include <strstream>
+
+
+
 using namespace std;
 
 
@@ -22,6 +27,46 @@ struct triangle
 struct mesh
 {
 	vector<triangle> tris;
+
+	bool LoadFromObjectFile(string sFilename)
+	{
+		ifstream f(sFilename);
+		if (!f.is_open())
+			return(false);
+
+		//Caching verts for parsing
+
+		vector<vec3d> verts;
+
+		while (!f.eof())
+		{
+			char line[128];
+			f.getline(line, 128);
+
+			strstream s;
+			s << line;
+
+			char junk;
+
+			if (line[0] == 'v')
+			{
+				vec3d vec;
+				
+				s >> junk >> vec.x >> vec.y >> vec.z;
+				verts.push_back(vec);
+			}
+
+			if (line[0] == 'f')
+			{
+				int triangles[3];
+
+				s >> junk >> triangles[0] >> triangles[1] >> triangles[2];
+				tris.push_back({ verts[triangles[0] - 1], verts[triangles[1] - 1], verts[triangles[2] - 1] });
+			}
+		}
+
+		return(true); 
+	}
 };
 
 struct mat4x4
@@ -98,33 +143,35 @@ private:
 public:
 	bool OnUserCreate() override
 	{
-		meshCube.tris =
-		{
-			// SOUTH
-			{ 0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 0.0f },
-			{ 0.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 0.0f, 0.0f },
+		//meshCube.tris =
+		//{
+		//	// SOUTH
+		//	{ 0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 0.0f },
+		//	{ 0.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 0.0f, 0.0f },
 
-			// EAST                                                      
-			{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f },
-			{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f, 1.0f },
+		//	// EAST                                                      
+		//	{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f },
+		//	{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f, 1.0f },
 
-			// NORTH                                                     
-			{ 1.0f, 0.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f, 1.0f },
-			{ 1.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 0.0f, 1.0f },
+		//	// NORTH                                                     
+		//	{ 1.0f, 0.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f, 1.0f },
+		//	{ 1.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 0.0f, 1.0f },
 
-			// WEST                                                      
-			{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 1.0f, 0.0f },
-			{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 0.0f,    0.0f, 0.0f, 0.0f },
+		//	// WEST                                                      
+		//	{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 1.0f, 0.0f },
+		//	{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 0.0f,    0.0f, 0.0f, 0.0f },
 
-			// TOP                                                       
-			{ 0.0f, 1.0f, 0.0f,    0.0f, 1.0f, 1.0f,    1.0f, 1.0f, 1.0f },
-			{ 0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f, 0.0f },
+		//	// TOP                                                       
+		//	{ 0.0f, 1.0f, 0.0f,    0.0f, 1.0f, 1.0f,    1.0f, 1.0f, 1.0f },
+		//	{ 0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f, 0.0f },
 
-			// BOTTOM                                                    
-			{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f },
-			{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f }
+		//	// BOTTOM                                                    
+		//	{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f },
+		//	{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f }
 
-		};
+		//};
+
+		meshCube.LoadFromObjectFile("Spaceship.obj");
 
 		// Hardcoded Projection Matrix
 
@@ -199,9 +246,9 @@ public:
 
 			triTranslated = triRotatedXZ;
 
-			triTranslated.p[0].z = triRotatedXZ.p[0].z + 2.0f;
-			triTranslated.p[1].z = triRotatedXZ.p[1].z + 2.0f;
-			triTranslated.p[2].z = triRotatedXZ.p[2].z + 2.0f;
+			triTranslated.p[0].z = triRotatedXZ.p[0].z + 5.0f;
+			triTranslated.p[1].z = triRotatedXZ.p[1].z + 5.0f;
+			triTranslated.p[2].z = triRotatedXZ.p[2].z + 5.0f;
 
 
 			vec3d normal, line1, line2;
