@@ -5,6 +5,7 @@
 #include "engine.h"
 #include <fstream>
 #include <strstream>
+#include <algorithm>
 
 
 
@@ -221,8 +222,11 @@ public:
 		zRot.m[2][2] = 1;
 		zRot.m[3][3] = 1;
 
-		// Draw Them Triangles
 
+		vector<triangle> vecTrianglesToDraw;
+
+
+		// Draw Them Triangles
 		for (auto tri : meshCube.tris)
 		{
 			triangle triProjected;
@@ -246,9 +250,9 @@ public:
 
 			triTranslated = triRotatedXZ;
 
-			triTranslated.p[0].z = triRotatedXZ.p[0].z + 5.0f;
-			triTranslated.p[1].z = triRotatedXZ.p[1].z + 5.0f;
-			triTranslated.p[2].z = triRotatedXZ.p[2].z + 5.0f;
+			triTranslated.p[0].z = triRotatedXZ.p[0].z + 8.0f;
+			triTranslated.p[1].z = triRotatedXZ.p[1].z + 8.0f;
+			triTranslated.p[2].z = triRotatedXZ.p[2].z + 8.0f;
 
 
 			vec3d normal, line1, line2;
@@ -271,8 +275,8 @@ public:
 			normal.z /= lenNorm;
 
 			if ((normal.x * (triTranslated.p[0].x - vCamera.x) +
-					normal.y * (triTranslated.p[0].y - vCamera.y) +
-					normal.z * (triTranslated.p[0].z - vCamera.z)) < 0.0f)
+				normal.y * (triTranslated.p[0].y - vCamera.y) +
+				normal.z * (triTranslated.p[0].z - vCamera.z)) < 0.0f)
 			{
 				// Single Direction Light
 
@@ -308,18 +312,38 @@ public:
 				triProjected.p[2].x *= 0.5f * (float)ScreenWidth();
 				triProjected.p[2].y *= 0.5f * (float)ScreenHeight();
 
+				vecTrianglesToDraw.push_back(triProjected);
 
+				//FillTriangle(triProjected.p[0].x, triProjected.p[0].y, triProjected.p[1].x, triProjected.p[1].y,
+				//	triProjected.p[2].x, triProjected.p[2].y, triProjected.sym, triProjected.col);
 
-				FillTriangle(triProjected.p[0].x, triProjected.p[0].y, triProjected.p[1].x, triProjected.p[1].y,
-					triProjected.p[2].x, triProjected.p[2].y, triProjected.sym, triProjected.col);
-
-				DrawTriangle(triProjected.p[0].x, triProjected.p[0].y, triProjected.p[1].x, triProjected.p[1].y,
-					triProjected.p[2].x, triProjected.p[2].y, PIXEL_SOLID, FG_WHITE);
+				//DrawTriangle(triProjected.p[0].x, triProjected.p[0].y, triProjected.p[1].x, triProjected.p[1].y,
+				//	triProjected.p[2].x, triProjected.p[2].y, PIXEL_SOLID, FG_WHITE);
 			}
-		};
+		}
+
+		// Sort triangles for artist algo, i.e. from back to front
+
+		sort(vecTrianglesToDraw.begin(), vecTrianglesToDraw.end(), [](triangle& t1, triangle& t2)
+		{
+			float z1 = (t1.p[0].z + t1.p[1].z + t1.p[2].z) / 3.0f;
+			float z2 = (t2.p[0].z + t2.p[1].z + t2.p[2].z) / 3.0f;
+			return(z1 > z2);
+		});
+		
+
+		for (auto& triProjected : vecTrianglesToDraw)
+		{
+			FillTriangle(triProjected.p[0].x, triProjected.p[0].y, triProjected.p[1].x, triProjected.p[1].y,
+				triProjected.p[2].x, triProjected.p[2].y, triProjected.sym, triProjected.col);
+
+			DrawTriangle(triProjected.p[0].x, triProjected.p[0].y, triProjected.p[1].x, triProjected.p[1].y,
+				triProjected.p[2].x, triProjected.p[2].y, PIXEL_SOLID, FG_WHITE);
+		}
+
+
 		return(true);
 	}
-
 };
 
 int main()
