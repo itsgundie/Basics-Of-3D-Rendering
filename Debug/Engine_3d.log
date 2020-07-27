@@ -1,14 +1,14 @@
 ﻿  Engine_3d.cpp
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(338,43): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(338,22): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(337,97): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(337,76): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(337,55): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(337,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(341,43): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(341,22): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(340,97): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(340,76): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(340,55): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(340,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(394,43): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(394,22): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(393,97): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(393,76): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(393,55): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(393,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(397,43): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(397,22): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(396,97): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(396,76): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(396,55): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Engine_3d.cpp(396,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
   Engine_3d.vcxproj -> C:\Users\Gundie\Desktop\Engine_3D\Engine_3d\Debug\Engine_3d.exe
